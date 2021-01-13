@@ -18,7 +18,7 @@ function eventChatCommand(playerName, cmd)
     end
   end
 
-    if args[1] == "row1" then
+    if args[1] == "row1" then -- The command won't work without 5 players.
   local y = 75
   if #args == 6 then
     for i = 1, 5 do
@@ -26,8 +26,8 @@ function eventChatCommand(playerName, cmd)
         y = y-70
       end
  tfm.exec.movePlayer(args[i+1], 80, y, false, 0, 0, false)
-      -- change y to whatever you need but dont change x
-      y = y+35*i -- example: move by 20 pixels every time
+      
+      y = y+35*i 
     end
   end
 end
