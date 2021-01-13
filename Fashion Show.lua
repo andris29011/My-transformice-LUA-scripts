@@ -5,11 +5,11 @@ function string.split(str, delimiter) -- this is not a must have function, i jus
     end
     return a
 end
- 
- 
+
+
 function eventChatCommand(playerName, cmd)
   local args = string.split(cmd, " ")
-  
+
   if args[1] == "out" then
     if args[2] then -- the command wont run if there are no arguments (player names)
       for i = 2, #args do -- teleports all players, names are divided by spacebar (example: !out Name1#0000 Name2#000)
@@ -17,8 +17,23 @@ function eventChatCommand(playerName, cmd)
       end
     end
   end
- 
+
+    if args[1] == "row1" then
+  local y = 75
+  if #args == 6 then
+    for i = 1, 5 do
+      if i == 5 then
+        y = y-70
+      end
+ tfm.exec.movePlayer(args[i+1], 80, y, false, 0, 0, false)
+      -- change y to whatever you need but dont change x
+      y = y+35*i -- example: move by 20 pixels every time
+    end
+  end
 end
+
+end
+
 -- [[ Disable ]] --
 system.disableChatCommandDisplay(nil)
  
@@ -27,11 +42,11 @@ for _, v in next, {'AutoTimeLeft', 'AutoShaman', 'AutoNewGame', 'AutoScore', 'Af
 end
 tfm.exec.newGame('7820340')
 tfm.exec.movePlayer("Villaaam#0000",560,110,false,0,50,false)
- 
+
 colors = {"#EFCE8F", "#98E2EB", "#F1C4F6", "#C2C2DA", "#1EF066", "#E9F01E", "#1E58F0", "#F01E4A", "#EE1EF0", "#24F01E"}
- 
+
 local counter = 0
- 
+
 function eventLoop()
   counter = counter + 1
   if counter > #colors then
