@@ -1,0 +1,3 @@
+https://mothereff.in/lua-minifier
+Use lua minifier to shorten your code and make it load faster in game.
+Required to use when your script exceeds 64k characters or else it won't launch!
