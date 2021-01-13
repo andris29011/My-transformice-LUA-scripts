@@ -1,1 +1,41 @@
-function string.split(a,b)local b,c=b or',',{lay}for d in a:gmatch('[^'..b..']+')do c[#c+1]=d end;return c end;function eventChatCommand(e,f)local g=string.split(f," ")if g[1]=="out"then if g[2]then for h=2,#g do tfm.exec.movePlayer(g[h],560,280,false,0,0,false)end end end end;system.disableChatCommandDisplay(nil)for i,j in next,{'AutoTimeLeft','AutoShaman','AutoNewGame','AutoScore','AfkDeath','PhysicalConsumables'}do tfm.exec['disable'..j]()end;tfm.exec.newGame('7820340')tfm.exec.movePlayer("Villaaam#0000",560,110,false,0,50,false)colors={"#EFCE8F","#98E2EB","#F1C4F6","#C2C2DA","#1EF066","#E9F01E","#1E58F0","#F01E4A","#EE1EF0","#24F01E"}local k=0;function eventLoop()k=k+1;if k>#colors then k=1 end;ui.setMapName("<font color='"..colors[k].."'>Fashion Show</font>")end
+function string.split(str, delimiter) -- this is not a must have function, i just use it to get arguments for chatCommand easier
+    local delimiter,a = delimiter or ',', {lay}
+    for part in str:gmatch('[^'..delimiter..']+') do
+        a[#a+1] = part
+    end
+    return a
+end
+ 
+ 
+function eventChatCommand(playerName, cmd)
+  local args = string.split(cmd, " ")
+  
+  if args[1] == "out" then
+    if args[2] then -- the command wont run if there are no arguments (player names)
+      for i = 2, #args do -- teleports all players, names are divided by spacebar (example: !out Name1#0000 Name2#000)
+        tfm.exec.movePlayer(args[i], 560, 280, false, 0, 0, false)
+      end
+    end
+  end
+ 
+end
+-- [[ Disable ]] --
+system.disableChatCommandDisplay(nil)
+ 
+for _, v in next, {'AutoTimeLeft', 'AutoShaman', 'AutoNewGame', 'AutoScore', 'AfkDeath', 'PhysicalConsumables'} do
+    tfm.exec['disable' .. v]()
+end
+tfm.exec.newGame('7820340')
+tfm.exec.movePlayer("Villaaam#0000",560,110,false,0,50,false)
+ 
+colors = {"#EFCE8F", "#98E2EB", "#F1C4F6", "#C2C2DA", "#1EF066", "#E9F01E", "#1E58F0", "#F01E4A", "#EE1EF0", "#24F01E"}
+ 
+local counter = 0
+ 
+function eventLoop()
+  counter = counter + 1
+  if counter > #colors then
+    counter = 1
+  end
+ ui.setMapName("<font color='"..colors[counter].."'>Fashion Show</font>")
+end
